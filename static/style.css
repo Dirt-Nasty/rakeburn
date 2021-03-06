@@ -1,0 +1,10 @@
+body {
+    background-color: #272727;
+    color: #ddd;
+    font-family: monospace;
+
+}
+
+a:visited {
+    color: blue;
+  }
