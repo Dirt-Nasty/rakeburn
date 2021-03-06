@@ -78,39 +78,46 @@ def index():
         
         for each in moonVaults:
         
-            saveTable = getTransfers(each['add'], 'RAKE', 1e18)
-            saveTable['fromTroken'] = each['name']
-            df = df.append((saveTable), ignore_index=True)
-            
-            tokenCount = float(bsc.get_acc_balance_by_token_contract_address(contract_address=each['contract'], address=each['add'])) / 1e18
-            tokenPrice = geckoPrice(each['name'])
+            while True:
+                try:
+                    saveTable = getTransfers(each['add'], 'RAKE', 1e18)
+                    time.sleep(1)
+                    br34pTable = getTransfers(each['add'], 'BR34P', 1e8)
+                except:
+                    continue
+                else:
+                
+                    saveTable['fromTroken'] = each['name']
+                    df = df.append((saveTable), ignore_index=True)
+                    
+                    tokenCount = float(bsc.get_acc_balance_by_token_contract_address(contract_address=each['contract'], address=each['add'])) / 1e18
+                    tokenPrice = geckoPrice(each['name'])
 
-            dollRemain.append(tokenCount * float(tokenPrice))
-            dollarAmount = formatDollar(tokenCount * float(tokenPrice))
+                    dollRemain.append(tokenCount * float(tokenPrice))
+                    dollarAmount = formatDollar(tokenCount * float(tokenPrice))
 
-            br34pTable = getTransfers(each['add'], 'BR34P', 1e8)
-            br34pTable['fromTroken'] = each['name']
-            br34p = br34p.append((br34pTable), ignore_index=True)
+                    
+                    br34pTable['fromTroken'] = each['name']
+                    br34p = br34p.append((br34pTable), ignore_index=True)
 
-            saveTable['timeStamp'] = pd.to_datetime(saveTable['timeStamp'],unit='s')
-            now  = datetime.utcnow()
-            duration = now - max(saveTable['timeStamp'])
-            duration_in_s = duration.total_seconds()
-            days    = divmod(duration_in_s, 86400)
-            hours   = divmod(days[1], 3600)               
-            minutes = divmod(hours[1], 60)
+                    saveTable['timeStamp'] = pd.to_datetime(saveTable['timeStamp'],unit='s')
+                    now  = datetime.utcnow()
+                    duration = now - max(saveTable['timeStamp'])
+                    duration_in_s = duration.total_seconds()
+                    days    = divmod(duration_in_s, 86400)
+                    hours   = divmod(days[1], 3600)               
+                    minutes = divmod(hours[1], 60)
 
-            yield '<br/>\n'
-            yield '%s<br/>\n' % '=============================='
-            yield '%s<br/>\n' % each['name']
-            yield '%s<br/>\n' % '=============================='
-            yield '%s<br/>\n' % ('Transactions: ' + str(saveTable.shape[0]) + " ---- Last Tx - %d hours, %d minutes ago" % (hours[0], minutes[0]))
-            yield '%s<br/>\n' % ('RAKE Burned: ' + str(saveTable['adjustedValue'].sum()) + ' ( Last - {} )'.format( saveTable.loc[saveTable['timeStamp'] == max(saveTable['timeStamp']), 'adjustedValue'].sum() ))
-            yield '%s<br/>\n' % ('BR34P Burned: ' + str(br34pTable['adjustedValue'].sum()) + ' ( Last - {} )'.format(br34pTable.loc[br34pTable['timeStamp'] == max(br34pTable['timeStamp']), 'adjustedValue'].sum() ))
-            yield '%s<br/>\n' % ("Remaining Balance: " + dollarAmount)
-
-            time.sleep(.6)
-    
+                    yield '<br/>\n'
+                    yield '%s<br/>\n' % '=============================='
+                    yield '%s<br/>\n' % each['name']
+                    yield '%s<br/>\n' % '=============================='
+                    yield '%s<br/>\n' % ('Transactions: ' + str(saveTable.shape[0]) + " ---- Last Tx - %d hours, %d minutes ago" % (hours[0], minutes[0]))
+                    yield '%s<br/>\n' % ('RAKE Burned: ' + str(saveTable['adjustedValue'].sum()) + ' ( Last - {} )'.format( saveTable.loc[saveTable['timeStamp'] == max(saveTable['timeStamp']), 'adjustedValue'].sum() ))
+                    yield '%s<br/>\n' % ('BR34P Burned: ' + str(br34pTable['adjustedValue'].sum()) + ' ( Last - {} )'.format(br34pTable.loc[br34pTable['timeStamp'] == max(br34pTable['timeStamp']), 'adjustedValue'].sum() ))
+                    yield '%s<br/>\n' % ("Remaining Balance: " + dollarAmount)
+                    time.sleep(.5)
+                    break
         dollRemain = formatDollar(sum(dollRemain))
 
         rakePrice = requests.get('https://farm.br34p.finance/bsc/get_stats')
@@ -141,4 +148,3 @@ def index():
 
     return Response(getPools(), mimetype='text/html')
 
-# app.run(debug=True)
