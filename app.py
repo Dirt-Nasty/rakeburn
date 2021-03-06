@@ -141,4 +141,4 @@ def index():
 
     return Response(getPools(), mimetype='text/html')
 
-app.run(debug=True)
+# app.run(debug=True)
