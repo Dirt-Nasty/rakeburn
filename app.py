@@ -12,7 +12,7 @@ app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
 def index():
-    bsc = BscScan('***REMOVED***') # key in quotation marks
+    bsc = BscScan('replaceAPIkey') # key in quotation marks
     dead = '0x000000000000000000000000000000000000dead'
 
     moonVaults = [
