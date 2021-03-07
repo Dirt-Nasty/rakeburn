@@ -120,7 +120,7 @@ def index():
                     yield '%s<br/>\n' % '=============================='
                     yield '%s<br/>\n' % each['name']
                     yield '%s<br/>\n' % '=============================='
-                    yield '%s<br/>\n' % ('Transactions: ' + str(saveTable.shape[0]) + " ---- Last Tx - %d hours, %d minutes ago" % (hours[0], minutes[0]))
+                    yield '%s<br/>\n' % ('Transactions: ' + str(saveTable.shape[0]) + " ---- Last Tx - %d days, %d hours, %d minutes ago" % (days[0], hours[0], minutes[0]))
                     yield '%s<br/>\n' % ('RAKE Burned: ' + str(saveTable['adjustedValue'].sum()) + ' ( Last - {} )'.format( saveTable.loc[saveTable['timeStamp'] == max(saveTable['timeStamp']), 'adjustedValue'].sum() ))
                     yield '%s<br/>\n' % ('BR34P Burned: ' + str(br34pTable['adjustedValue'].sum()) + ' ( Last - {} )'.format(br34pTable.loc[br34pTable['timeStamp'] == max(br34pTable['timeStamp']), 'adjustedValue'].sum() ))
                     yield '%s<br/>\n' % ("Remaining Balance: " + dollarAmount)
@@ -144,7 +144,7 @@ def index():
         yield '%s<br/>\n' % '=============================='
         yield '%s<br/>\n' % 'TOTALS'
         yield '%s<br/>\n' % '=============================='
-        yield '%s<br/>\n' % ('Total Transactions: ' +  str(df.shape[0]) + " ---- Last Tx - %d hours, %d minutes ago" % (hours[0], minutes[0]))
+        yield '%s<br/>\n' % ('Total Transactions: ' +  str(df.shape[0]) + " ---- Last Tx - %d days, %d hours, %d minutes ago" % (days[0], hours[0], minutes[0]))
         yield '%s<br/>\n' % ('Total RAKE Burned: ' + str(df['adjustedValue'].sum()) + " (@ Current Price : {})".format(formatDollar(df['adjustedValue'].sum() * rakePrice ) ) )  
         yield '%s<br/>\n' % ('Total BR34P Burned: ' + str(br34p['adjustedValue'].sum()) + ' (@ Current Price : {})'.format(formatDollar(br34p['adjustedValue'].sum() * br34pPrice ) ) )
         yield '%s<br/>\n' % ('Total Remaining Balance: ' + dollRemain)
