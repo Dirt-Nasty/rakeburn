@@ -66,12 +66,20 @@ def index():
         return tokenPrice   
       
     def getPools():
+
+        rakePrice = requests.get('https://farm.br34p.finance/bsc/get_stats')
+        rakePrice = json.loads(rakePrice.text)['priceAUTO']
+        br34pPrice = geckoPrice('br34p')
+
+
         yield '<link rel="stylesheet" type="text/css" href="/static/style.css">'
         yield '%s<br/>\n' % '==========================================='
         yield '%s <br/>\n' % 'RAKE MOON LOCKER BURNS by DirtNasty'
         yield '<a href="https://farm.br34p.finance/">https://farm.br34p.finance/</a> <br/>\n'
+        yield '%s<br/>\n' % 'RAKE Price: {} - BR34P Price: {}'.format(formatDollar(rakePrice), formatDollar(br34pPrice))
         yield '%s<br/>\n' % '==========================================='
         token = '0x24342BA15dDfC2c8e35D4583E4F208BDA0c84D04'
+
         dollRemain = []
         df = pd.DataFrame()
         br34p = pd.DataFrame()
@@ -119,11 +127,6 @@ def index():
                     time.sleep(.5)
                     break
         dollRemain = formatDollar(sum(dollRemain))
-
-        rakePrice = requests.get('https://farm.br34p.finance/bsc/get_stats')
-
-        rakePrice = json.loads(rakePrice.text)['priceAUTO']
-        br34pPrice = geckoPrice('br34p')
         df['timeStamp'] = pd.to_datetime(df['timeStamp'],unit='s')
         now  = datetime.utcnow()
         duration = now - max(df['timeStamp'])
