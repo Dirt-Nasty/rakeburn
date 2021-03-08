@@ -5,7 +5,7 @@ import requests
 import json
 import pandas as pd
 from bscscan import BscScan
-from datetime import datetime
+from datetime import datetime, timedelta
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -128,6 +128,7 @@ def index():
                     break
         dollRemain = formatDollar(sum(dollRemain))
         df['timeStamp'] = pd.to_datetime(df['timeStamp'],unit='s')
+        br34p['timeStamp'] = pd.to_datetime(br34p['timeStamp'],unit='s')
         now  = datetime.utcnow()
         duration = now - max(df['timeStamp'])
         duration_in_s = duration.total_seconds()
@@ -137,16 +138,17 @@ def index():
 
 
 
-
-
-
+        twentyFour = now - timedelta(hours=24)
+        rakex = df.loc[df['timeStamp'] >= twentyFour]
+        br34px = br34p.loc[br34p['timeStamp'] >= twentyFour]
+        
         yield '<br/>\n'
         yield '%s<br/>\n' % '=============================='
         yield '%s<br/>\n' % 'TOTALS'
         yield '%s<br/>\n' % '=============================='
-        yield '%s<br/>\n' % ('Total Transactions: ' +  str(df.shape[0]) + " ---- Last Tx - %d days, %d hours, %d minutes ago" % (days[0], hours[0], minutes[0]))
-        yield '%s<br/>\n' % ('Total RAKE Burned: ' + str(df['adjustedValue'].sum()) + " (@ Current Price : {})".format(formatDollar(df['adjustedValue'].sum() * rakePrice ) ) )  
-        yield '%s<br/>\n' % ('Total BR34P Burned: ' + str(br34p['adjustedValue'].sum()) + ' (@ Current Price : {})'.format(formatDollar(br34p['adjustedValue'].sum() * br34pPrice ) ) )
+        yield '%s<br/>\n' % ('Total Transactions: ' + str(df.shape[0]) + " ---- Last Tx - %d days, %d hours, %d minutes ago" % (days[0], hours[0], minutes[0]))
+        yield '%s<br/>\n' % ('Total RAKE Burned: '  + str(df['adjustedValue'].sum()) + " (@ Current Price : {})".format(formatDollar(df['adjustedValue'].sum() * rakePrice ) ) + " --- Last 24 Hours: {}".format(str(rakex['adjustedValue'].sum())))  
+        yield '%s<br/>\n' % ('Total BR34P Burned: ' + str(br34p['adjustedValue'].sum()) + ' (@ Current Price : {})'.format(formatDollar(br34p['adjustedValue'].sum() * br34pPrice ) ) +" --- Last 24 Hours: {}".format(str(br34px['adjustedValue'].sum())))
         yield '%s<br/>\n' % ('Total Remaining Balance: ' + dollRemain)
 
     return Response(getPools(), mimetype='text/html')
