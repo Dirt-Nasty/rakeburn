@@ -4,15 +4,18 @@ import time
 import requests
 import json
 import pandas as pd
+import os
 from bscscan import BscScan
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
 
 app = Flask(__name__, static_url_path='/static')
 
 
 @app.route('/')
 def index():
-    bsc = BscScan('replaceAPIkey') # key in quotation marks
+    load_dotenv()
+    bsc = BscScan(os.getenv("SECRET_KEY"))
     dead = '0x000000000000000000000000000000000000dead'
 
     moonVaults = [
