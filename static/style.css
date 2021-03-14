@@ -4,7 +4,11 @@ body {
     font-family: monospace;
 
 }
+a:visited, a:link, a:visited {
+    color: green;
+    text-decoration: none
+}
+a:hover { text-decoration: underline}
+#twat{ display:block; margin: 0 auto; width:300px; height: 200px;}
+#main{ display:block; margin: 0 auto; width:75%; height: auto; color: green;}
 
-a:visited {
-    color: blue;
-  }
