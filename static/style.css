@@ -9,6 +9,8 @@ a:visited, a:link, a:visited {
     text-decoration: none
 }
 a:hover { text-decoration: underline}
-#twat{ display:block; margin: 0 auto; width:300px; height: 200px;}
-#main{ display:block; margin: 0 auto; width:75%; height: auto; color: green;}
+#main{ color: green; line-height:18px;}
 
+h1, h2, h3 {display:inline-block;position:relative;line-height:18px;}
+.container {width: 500px; padding:0px;background:red; }
+em {color: white; text-decoration: none; font-size:12pt; }

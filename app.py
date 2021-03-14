@@ -210,7 +210,7 @@ def index():
         yield '%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&%#&&&&%&%&&#%&&%.&nbsp;&nbsp;#&&&&&%&%%&&#%&&&(&&&&,&nbsp;&&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>'
         yield '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&&&@&*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&&&%%&&&&,*%&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>'
         yield '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.*,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>'
-        yield '&nbsp;&nbsp;_______&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______&nbsp;&nbsp;&nbsp;______&nbsp;&nbsp;&nbsp;________&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_______&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>'
+        yield '&nbsp;_______&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______&nbsp;&nbsp;&nbsp;______&nbsp;&nbsp;&nbsp;________&nbsp;&nbsp;&nbsp;__&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;______&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_______&nbsp;&nbsp;_&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>'
         yield '(_______)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(____&nbsp;&nbsp;\&nbsp;(_____&nbsp;\&nbsp;(_______/&nbsp;&nbsp;/&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;(_____&nbsp;\&nbsp;&nbsp;&nbsp;&nbsp;(_______)(_)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>'
         yield '&nbsp;_____&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____)&nbsp;&nbsp;)&nbsp;_____)&nbsp;)&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;/&nbsp;/____&nbsp;&nbsp;_____)&nbsp;)&nbsp;&nbsp;&nbsp;&nbsp;_____&nbsp;&nbsp;&nbsp;&nbsp;_&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;&nbsp;____&nbsp;&nbsp;&nbsp;____&nbsp;<br>'
         yield '|&nbsp;&nbsp;___)&nbsp;&nbsp;&nbsp;/&nbsp;_&nbsp;&nbsp;|&nbsp;/&nbsp;___)|&nbsp;&nbsp;&nbsp;&nbsp;\&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;__&nbsp;&nbsp;(&nbsp;(_____&nbsp;(&nbsp;&nbsp;&nbsp;(___&nbsp;\&nbsp;|___&nbsp;&nbsp;&nbsp;_)|&nbsp;&nbsp;____/&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;___)&nbsp;&nbsp;|&nbsp;||&nbsp;&nbsp;_&nbsp;\&nbsp;&nbsp;/&nbsp;_&nbsp;&nbsp;||&nbsp;&nbsp;_&nbsp;\&nbsp;&nbsp;/&nbsp;___)&nbsp;/&nbsp;_&nbsp;&nbsp;)<br>'
@@ -258,13 +258,13 @@ def index():
                     minutes = divmod(hours[1], 60)
 
                     yield '<br>\n'
-                    yield '%s<br>\n' % '=============================='
-                    yield '%s<br>\n' % each['name']
-                    yield '%s<br>\n' % '=============================='
-                    yield '%s<br>\n' % ('Transactions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ' + str(saveTable.shape[0]) + " | Last Tx - %d days, %d hours, %d minutes ago" % (days[0], hours[0], minutes[0]))
-                    yield '%s<br>\n' % ('RAKE Burned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ' + str(saveTable['adjustedValue'].sum()) + ' Last - {} '.format( saveTable.loc[saveTable['timeStamp'] == max(saveTable['timeStamp']), 'adjustedValue'].sum() ))
-                    yield '%s<br>\n' % ('BR34P Burned&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ' + str(br34pTable['adjustedValue'].sum()) + ' Last - {} '.format(br34pTable.loc[br34pTable['timeStamp'] == max(br34pTable['timeStamp']), 'adjustedValue'].sum() ))
-                    yield '%s<br>\n' % ("Remaining Balance&nbsp;&nbsp;: " + dollarAmount)
+                    yield '<div id="item">'
+                    yield '<h2>Burned token: <em>%s</em></h2><br>' % each['name']
+                    yield '%s<br>\n' % ('<h3>RAKE Burned&nbsp;&nbsp;:</h3> <em>' + str(saveTable['adjustedValue'].sum()) + '</em> | Last - <em>{}</em> '.format( saveTable.loc[saveTable['timeStamp'] == max(saveTable['timeStamp']), 'adjustedValue'].sum() ))
+                    yield '<h3>BR34P Burned&nbsp;:</h3>%s<br>\n' % (' <em>' + str(br34pTable['adjustedValue'].sum()) + '</em> | Last - <em>{}</em> '.format(br34pTable.loc[br34pTable['timeStamp'] == max(br34pTable['timeStamp']), 'adjustedValue'].sum() ))
+                    yield '<h3>Remaining&nbsp;&nbsp;&nbsp;&nbsp;: </h3> <em>%s</em><br>\n' % (dollarAmount)
+                    yield '<h3>Tx Total</h3> %s<br>\n' % (' <em>' + str(saveTable.shape[0]) + '</em>  <h3>Last Tx - <em>%d</em> days, <em>%d</em> hours, <em>%d</em> minutes ago</h3>' % (days[0], hours[0], minutes[0]))
+                    yield '</div><hr>'
                     time.sleep(.1)
                     break
         dollRemain = formatDollar(sum(dollRemain))
@@ -283,13 +283,12 @@ def index():
          
         yield '<br>\n'
         yield '%s<br>\n' % '=============================='
-        yield '%s<br>\n' % 'TOTALS'
+        yield '<h2>%s</h2><br>\n' % 'TOTALS'
         yield '%s<br>\n' % '=============================='
-        yield '%s<br>\n' % ('Total Transactions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ' + str(df.shape[0]) + " | Last Tx - %d days, %d hours, %d minutes ago" % (days[0], hours[0], minutes[0]))
-        yield '%s<br>\n' % ('RAKE Burned Total/USD/24h &nbsp;: '  + formatClean(df['adjustedValue'].sum()) + " /  {}".format(formatDollar(df['adjustedValue'].sum() * rakePrice )) + " / {}".format(formatClean((rakex['adjustedValue'].sum()))))  
-        yield '%s<br>\n' % ('BR34P Burned Total/USD/24h : ' + formatClean(br34p['adjustedValue'].sum()) + (" / {}".format(formatDollar(br34p['adjustedValue'].sum() * br34pPrice ) )) + " / {}".format(formatClean(br34px['adjustedValue'].sum())))
-        yield '%s<br>\n' % ('Total Remaining Balance&nbsp&nbsp;&nbsp; : ' + dollRemain)
+        yield '<h3>Total Transactions &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</h3> %s<br>\n' % ('<em>' + str(df.shape[0]) + "</em> | Last Tx - <em>%d</em> days, <em>%d</em> hours, <em>%d</em> minutes ago" % (days[0], hours[0], minutes[0]))
+        yield '<h3>RAKE Burned Total/USD/24h &nbsp;:</h3> %s<br>\n' % ('<em>'  + formatClean(df['adjustedValue'].sum()) + "</em> / <em> {}</em>".format(formatDollar(df['adjustedValue'].sum() * rakePrice )) + " / <em>{}</em>".format(formatClean((rakex['adjustedValue'].sum()))))  
+        yield '<h3>BR34P Burned Total/USD/24h :</h3> %s<br>\n' % ('<em>' + formatClean(br34p['adjustedValue'].sum()) + ("</em> / <em>{}</em>".format(formatDollar(br34p['adjustedValue'].sum() * br34pPrice ) )) + " / <em>{}</em>".format(formatClean(br34px['adjustedValue'].sum())))
+        yield '<h3>Total Remaining Balance&nbsp&nbsp;&nbsp; :</h3> <em>%s</em><br>\n' % (' ' + dollRemain)
         yield '</div>'
-        yield '<div id="twat"></div>'
 
     return Response(getPools(), mimetype='text/html')
