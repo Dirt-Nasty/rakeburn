@@ -4,7 +4,13 @@ body {
     font-family: monospace;
 
 }
+a:visited, a:link, a:visited {
+    color: green;
+    text-decoration: none
+}
+a:hover { text-decoration: underline}
+#main{ color: green; line-height:18px;}
 
-a:visited {
-    color: blue;
-  }
+h1, h2, h3 {display:inline-block;position:relative;line-height:18px;}
+.container {width: 500px; padding:0px;background:red; }
+em {color: white; text-decoration: none; font-size:12pt; }
